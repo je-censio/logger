@@ -10,8 +10,8 @@ I also wanted to try out Riak's CRDT counters, which make counting
 events per user/device/url very simple.
 
 The frontend is Flask (again for simplicity), although the database
-stuff should all be safely concurrent (although it doesn't protect
-some things such as a user registering multiple times).
+stuff should all be safely concurrent if we wanted to use something like
+Tornado to handle concurrent requests.
 
 Endpoints that require authentication (register-device and store) use
 HTTP basic auth to keep things easy to play with (with curl, for example).
