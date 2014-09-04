@@ -17,6 +17,8 @@ Endpoints that require authentication (register-device and store) use
 HTTP basic auth to keep things easy to play with (with curl, for example).
 The password is salted and hashed against the stored hash in the database.
 
+Depends on Flask and requests -- install with `pip install -r requirements.txt`
+
 Endpoints
 ---------
 * `/register-user/name/<name>/email/<email>/password/<password>`
