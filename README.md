@@ -13,21 +13,22 @@ The frontend is Flask (again for simplicity), although the database
 stuff should all be safely concurrent (although it doesn't protect
 some things such as a user registering multiple times).
 
+Endpoints that require authentication (register-device and store) use
+HTTP basic auth to keep things easy to play with (with curl, for example).
+The password is salted and hashed against the stored hash in the database.
+
 Endpoints
 ---------
-`/register-user/name/<name>/email/<email>/password/<password>`
-
-`/register-device/name/<name>/device/<device>` (requires authentication)
-
-`/store/name/<name>/device/<device>/method/<method>/url/<url>` (requires authentication)
-`url` obviously must be urlencoded
-
-`/list`
-Return a JSON object of all log entries -- pretty dumb for lots of objects
-but it gets the point across
-
-`/summarize`
-Returns the contents of all the counters (user counts, device counts, method/url counts)
+* `/register-user/name/<name>/email/<email>/password/<password>`
+* `/register-device/name/<name>/device/<device>` 
+  * requires authentication
+* `/store/name/<name>/device/<device>/method/<method>/url/<url>` 
+  * requires authentication
+  * `url` obviously must be urlencoded
+* `/list`
+  * Return a JSON object of all log entries -- pretty dumb for lots of objects but it gets the point across
+* `/summarize`
+  * Returns the contents of all the counters (user counts, device counts, method/url counts)
 
 
 Running
@@ -37,6 +38,7 @@ creating buckets and such. `populate.sh` will populate with some dumb test data.
 
 Example output of `/summarize` after running some data through it:
 
+```javascript
 {
     "Device ID": {
         "dev-1": 6,
@@ -59,3 +61,4 @@ Example output of `/summarize` after running some data through it:
         "user-4": 4
     }
 }
+```
