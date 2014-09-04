@@ -6,8 +6,6 @@ import requests
 import uuid
 import hashlib
 
-import riak
-import riak.datatypes
 from flask import Flask, request, Response
 app = Flask(__name__)
 
